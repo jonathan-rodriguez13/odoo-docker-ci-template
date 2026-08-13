@@ -19,5 +19,10 @@ jobs:
 
     - name: Check Python Syntax
       run: |
-        python -m py_compile $(find . -name "*.py")
-        echo " Código Python validado correctamente."
+        FILES=$(find . -name "*.py")
+        if [ -n "$FILES" ]; then
+          python -m py_compile $FILES
+          echo " Código Python validado correctamente."
+        else
+          echo " No se encontraron archivos .py para analizar aún."
+        fi
